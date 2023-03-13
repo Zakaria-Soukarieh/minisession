@@ -1,0 +1,28 @@
+{
+  "name": "minisessions-backend",
+  "version": "1.0.0",
+  "description": "helloo",
+  "main": "index.js",
+  "type" : "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zakaria-Soukarieh/minisession.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zakaria-Soukarieh/minisession/issues"
+  },
+  "homepage": "https://github.com/Zakaria-Soukarieh/minisession#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.1",
+    "nodemon": "^2.0.21"
+  }
+}
