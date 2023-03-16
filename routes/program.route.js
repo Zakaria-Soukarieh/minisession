@@ -1,23 +1,24 @@
-// import Express from "express";
-// import programController from "../controllers/program.controller";
+import express from "express";
+import programController from "../controllers/program.controller.js";
 
-// const router = express.Router();
+const router = express.Router();
+
+// const {
+// 	getProg,
+// 	setProg,
+// 	updateProg,
+// 	deleteProg,
+// } = require("../controllers/program.controller");
+
+
 // router.route("/").get("/program", programController)
 
 
+// router.route("/").get(getProg).post(setProg);
+// router.route("/:id").delete(deleteProg).put(updateProg);
 
-// export default router
+router.route("/").get(programController.getProg).post(programController.setProg);
 
-const express = require("express");
-const router = express.Router();
-const {
-	getGoals,
-	setGoal,
-	updateGoal,
-	deleteGoal,
-} = require("../controllers/goalController");
+router.route("/:id").delete(programController.deleteProg).put(programController.updateProg);
 
-router.route("/").get(getGoals).post(setGoal);
-router.route("/:id").delete(deleteGoal).put(updateGoal);
-
-module.exports = router;
+export default router;

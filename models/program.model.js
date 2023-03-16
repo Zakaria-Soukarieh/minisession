@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const programSchema = mongoose.schema({
+const programSchema = mongoose.Schema({
 	title: {
 		type: String,
 		required: true,

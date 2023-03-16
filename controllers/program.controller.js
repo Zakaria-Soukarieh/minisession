@@ -1,58 +1,63 @@
-const asyncHandler = require("express-async-handler");
+// const asyncHandler = require("express-async-handler");
+// const prog = require("../models/program.model");
+import asyncHandler from "express-async-handler";
+import prog from "../models/program.model.js";
 
-const Goal = require("../models/goalModel");
+const getProg = asyncHandler(async (req, res) => {
+	const Progs = await prog.find();
 
-const getGoals = asyncHandler(async (req, res) => {
-	const goals = await Goal.find();
-
-	res.status(200).json(goals);
+	res.status(200).json(Progs);
 });
 
-const setGoal = asyncHandler(async (req, res) => {
-	if (!req.body.text || !req.body.phone || !req.body.age) {
+const setProg = asyncHandler(async (req, res) => {
+	if (
+		!req.body.title ||
+		!req.body.sub_title ||
+		!req.body.description /* || !req.body.image */
+	) {
 		res.status(400);
 		throw new Error("Please fill all required fields");
 	}
 
-	const goal = await Goal.create({
-		text: req.body.text,
-		phone: req.body.phone,
-		age: req.body.age,
+	const Prog = await prog.create({
+		title: req.body.title,
+		sub_title: req.body.sub_title,
+		description: req.body.description,
+		// image: req.body.image,
 	});
-
-	res.status(200).json(goal);
+	res.status(200).json(Prog);
 });
 
-const updateGoal = asyncHandler(async (req, res) => {
-	const goal = await Goal.findById(req.params.id);
+const updateProg = asyncHandler(async (req, res) => {
+	const Prog = await prog.findById(req.params.id);
 
-	if (!goal) {
+	if (!Prog) {
 		res.status(400);
-		throw new Error("Goal not found");
+		throw new Error("Prog not found");
 	}
 
-	const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+	const updatedProg = await prog.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 	});
 
-	res.status(200).json(updatedGoal);
+	res.status(200).json(updatedProg);
 });
 
-const deleteGoal = asyncHandler(async (req, res) => {
-	const goal = await Goal.findById(req.params.id);
+const deleteProg = asyncHandler(async (req, res) => {
+	const Prog = await prog.findById(req.params.id);
 
-	if (!goal) {
+	if (!Prog) {
 		res.status(400);
-		throw new Error("Goal not found");
+		throw new Error("Prog not found");
 	}
-	await goal.remove();
+	await Prog.remove();
 
 	res.status(200).json({ id: req.params.id });
 });
 
-module.exports = {
-	getGoals,
-	setGoal,
-	updateGoal,
-	deleteGoal,
+export default {
+	getProg,
+	setProg,
+	updateProg,
+	deleteProg,
 };
